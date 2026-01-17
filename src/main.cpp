@@ -1,56 +1,31 @@
 #include <Arduino.h>
-#include <LiquidCrystal_I2C.h>
-#include <RotaryEncoder.h>
-#include <Bounce2.h>
+#include "encoder.h"
+#include "display.h"
 
-
-#define LED_PIN 13
-
-#define ENC_A 8   // CLK
-#define ENC_B 9   // DT
-#define ENC_SW 10 // Botón
-
-LiquidCrystal_I2C lcd(0x27, 20, 4);
-
-RotaryEncoder encoder(ENC_A, ENC_B);
-Bounce button = Bounce();
-long lastPos = 0;
 
 void setup() {
+  Serial.begin(115200);
+  encoderInit();
+  displayInit();
 
-   Serial.begin(9600);
-  pinMode(LED_PIN, OUTPUT);
-
-  lcd.init();        // Inicializa LCD
-  lcd.backlight();  // Enciende luz de fondo
-
-  lcd.setCursor(0, 0);
-  lcd.print("Proyecto Arduino");
-  lcd.setCursor(0, 1);
-  lcd.print("LCD 20x4 I2C");
-
-   pinMode(ENC_SW, INPUT_PULLUP);
-  button.attach(ENC_SW);
-  button.interval(5);
-
-  Serial.println("Encoder test start");
+  Serial.println("display test start 0");
 }
 
 void loop() {
+   encoderUpdate();
 
-encoder.tick();
-  button.update();
+  static long lastValue  = 0;
+  long value = encoderGetValue();
 
-  long newPos = encoder.getPosition();
-  if (newPos != lastPos) {
-    Serial.print("Position: ");
-    Serial.println(newPos);
-    lastPos = newPos;
+  if (value != lastValue ) {
+    Serial.print("Value: ");
+    Serial.println(value);
+    displayPrintValue(value);
+    lastValue = value;
   }
 
-  if (button.fell()) {
-    Serial.println("Button pressed");
+  if (encoderButtonPressed()) {
+    displayPrintMessage("Boton", "Presionado");
+    Serial.println("BUTTON CLICK");
   }
-
-  
 }
