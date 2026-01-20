@@ -29,6 +29,15 @@ extern int32_t motor1_speed;
 extern int32_t motor1_accel;
 extern int32_t motor1_sentido;
 
+/* ====== MOTOR 2 ====== */
+extern int32_t motor2_prg0_speed;
+extern int32_t motor2_prg0_accel;
+
+extern int32_t motor2_prg1_speed;
+extern int32_t motor2_prg1_accel;
+
+extern int32_t motor2_active_prg;
+
 /* ====== MENÚ RAÍZ ====== */
 extern const MenuItem mainMenu[];
 extern const uint8_t mainMenuCount;
