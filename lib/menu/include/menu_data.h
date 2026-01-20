@@ -3,6 +3,12 @@
 
 #include <Arduino.h>
 
+enum MenuFormat {
+  MENU_FMT_NONE,
+  MENU_FMT_SENSE,
+  MENU_FMT_DEC1
+};
+
 enum MenuItemType {
   MENU_SUBMENU,
   MENU_VALUE,
@@ -20,6 +26,8 @@ struct MenuItem {
   int32_t min;
   int32_t max;
   int32_t step;
+
+  MenuFormat format;
 
   void (*action)();
 };

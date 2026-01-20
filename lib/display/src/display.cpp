@@ -8,6 +8,7 @@
 
 static LiquidCrystal_I2C lcd(LCD_ADDR, LCD_COLS, LCD_ROWS);
 static uint8_t firstVisible = 0;
+static void displayPrintValue(const MenuItem& item);
 
 void displayInit() {
   lcd.init();
@@ -38,7 +39,31 @@ void displayRenderMenu() {
 
     if (m.currentMenu[idx].type == MENU_VALUE) {
       lcd.setCursor(14, row);
-      lcd.print(*m.currentMenu[idx].value);
+      //lcd.print(*m.currentMenu[idx].value);
+      displayPrintValue(m.currentMenu[idx]);
     }
+  }
+}
+
+static void displayPrintValue(const MenuItem& item) {
+  if (item.value == nullptr) return;
+
+  switch (item.format) {
+
+    case MENU_FMT_NONE:
+      lcd.print(*item.value);
+      break;
+
+    case MENU_FMT_SENSE:
+      lcd.print(*item.value == 0 ? "Adel" : "Rev");
+      break;
+
+    case MENU_FMT_DEC1:
+      lcd.print(*item.value / 10.0, 1);
+      break;
+
+    default:
+      lcd.print(*item.value);
+      break;
   }
 }

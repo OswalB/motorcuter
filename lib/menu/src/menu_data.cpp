@@ -19,6 +19,7 @@ const MenuItem motor1Menu[] = {
     MENU_VALUE,
     nullptr, 0,
     &motor1_speed, 0, 1000, 10,
+    MENU_FMT_NONE,
     nullptr
   },
   {
@@ -26,6 +27,7 @@ const MenuItem motor1Menu[] = {
     MENU_VALUE,
     nullptr, 0,
     &motor1_accel, 0, 500, 5,
+    MENU_FMT_NONE,
     nullptr
   },
   {
@@ -33,6 +35,7 @@ const MenuItem motor1Menu[] = {
     MENU_VALUE,
     nullptr, 0,
     &motor1_sentido, 0, 1, 1,
+    MENU_FMT_SENSE,
     nullptr
   }
 };
@@ -43,6 +46,7 @@ const MenuItem motor2_prg0_Menu[] = {
     MENU_VALUE,
     nullptr, 0,
     &motor2_prg0_speed, 0, 1500, 10,
+    MENU_FMT_NONE,
     nullptr
   },
   {
@@ -50,6 +54,7 @@ const MenuItem motor2_prg0_Menu[] = {
     MENU_VALUE,
     nullptr, 0,
     &motor2_prg0_accel, 0, 500, 5,
+    MENU_FMT_NONE,
     nullptr
   }
 };
@@ -60,6 +65,7 @@ const MenuItem motor2_prg1_Menu[] = {
     MENU_VALUE,
     nullptr, 0,
     &motor2_prg1_speed, 0, 1500, 10,
+    MENU_FMT_NONE,
     nullptr
   },
   {
@@ -67,6 +73,7 @@ const MenuItem motor2_prg1_Menu[] = {
     MENU_VALUE,
     nullptr, 0,
     &motor2_prg1_accel, 0, 500, 5,
+    MENU_FMT_NONE,
     nullptr
   }
 };
@@ -79,6 +86,7 @@ const MenuItem motor2Menu[] = {
     MENU_VALUE,
     nullptr, 0,
     &motor2_active_prg, 0, 1, 1,
+    MENU_FMT_NONE,
     nullptr
   },
   {
@@ -86,6 +94,7 @@ const MenuItem motor2Menu[] = {
     MENU_SUBMENU,
     motor2_prg0_Menu, 2,
     nullptr, 0, 0, 0,
+    MENU_FMT_NONE,
     nullptr
   },
   {
@@ -93,6 +102,7 @@ const MenuItem motor2Menu[] = {
     MENU_SUBMENU,
     motor2_prg1_Menu, 2,
     nullptr, 0, 0, 0,
+    MENU_FMT_NONE,
     nullptr
   }
 };
@@ -104,6 +114,7 @@ const MenuItem mainMenu[] = {
     MENU_SUBMENU,
     motor1Menu, 3,
     nullptr, 0, 0, 0,
+    MENU_FMT_NONE,
     nullptr
   },
   {
@@ -111,6 +122,7 @@ const MenuItem mainMenu[] = {
     MENU_SUBMENU,
     motor2Menu, 3,
     nullptr, 0, 0, 0,
+    MENU_FMT_NONE,
     nullptr
   }
 };
