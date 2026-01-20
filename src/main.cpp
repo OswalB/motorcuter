@@ -1,9 +1,11 @@
 #include <Arduino.h>
-#include "encoder.h"
-#include "display.h"
+
+#include <encoder.h>
+#include <menu.h>
+#include <display.h>
 
 
-void setup() {
+/*void setup() {
   Serial.begin(115200);
   encoderInit();
   displayInit();
@@ -27,5 +29,21 @@ void loop() {
   if (encoderButtonPressed()) {
     displayPrintMessage("Boton", "Presionado");
     Serial.println("BUTTON CLICK");
+  }
+}*/
+
+void setup() {
+  encoderInit();
+  menuInit();
+  displayInit();
+  displayRenderMenu();
+}
+
+void loop() {
+  MenuEvent event = encoderGetEvent();
+
+  if (event != MENU_EVENT_NONE) {
+    menuHandleEvent(event);
+    displayRenderMenu();
   }
 }

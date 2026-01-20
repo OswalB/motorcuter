@@ -1,0 +1,12 @@
+#ifndef MENU_EVENTS_H
+#define MENU_EVENTS_H
+
+enum MenuEvent {
+  MENU_EVENT_NONE,
+  MENU_EVENT_UP,
+  MENU_EVENT_DOWN,
+  MENU_EVENT_CLICK,
+  MENU_EVENT_BACK
+};
+
+#endif
