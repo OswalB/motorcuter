@@ -5,6 +5,8 @@
 
 void displayInit();
 void displayRenderMenu();
+void displayRenderStatus();
+void displayClear();
 
 #endif
 

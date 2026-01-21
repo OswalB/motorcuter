@@ -67,3 +67,23 @@ static void displayPrintValue(const MenuItem& item) {
       break;
   }
 }
+
+void displayRenderStatus() {
+  lcd.setCursor(0, 0);
+  lcd.print("Estado Maquina");
+
+  lcd.setCursor(0, 1);
+  lcd.print("M1 Vel:");
+  lcd.print(motor1_speed);
+
+  lcd.setCursor(0, 2);
+  lcd.print("M1 Acc:");
+  lcd.print(motor1_accel);
+
+  lcd.setCursor(0, 3);
+  lcd.print("Menu: Click");
+}
+
+void displayClear() {
+  lcd.clear();
+}

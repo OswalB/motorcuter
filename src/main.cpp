@@ -4,46 +4,55 @@
 #include <menu.h>
 #include <display.h>
 
+enum UiScreen
+{
+  UI_SCREEN_STATUS,
+  UI_SCREEN_SETTINGS
+};
 
-/*void setup() {
-  Serial.begin(115200);
-  encoderInit();
-  displayInit();
+static UiScreen currentScreen = UI_SCREEN_STATUS;
 
-  Serial.println("display test start 0");
-}
-
-void loop() {
-   encoderUpdate();
-
-  static long lastValue  = 0;
-  long value = encoderGetValue();
-
-  if (value != lastValue ) {
-    Serial.print("Value: ");
-    Serial.println(value);
-    displayPrintValue(value);
-    lastValue = value;
-  }
-
-  if (encoderButtonPressed()) {
-    displayPrintMessage("Boton", "Presionado");
-    Serial.println("BUTTON CLICK");
-  }
-}*/
-
-void setup() {
+void setup()
+{
   encoderInit();
   menuInit();
   displayInit();
   displayRenderMenu();
 }
 
-void loop() {
+void loop()
+{
   MenuEvent event = encoderGetEvent();
 
-  if (event != MENU_EVENT_NONE) {
+  /* ================== STATUS ================== */
+  if (currentScreen == UI_SCREEN_STATUS)
+  {
+
+    if (event == MENU_EVENT_CLICK)
+    {
+      currentScreen = UI_SCREEN_SETTINGS;
+      displayClear();
+      displayRenderMenu();
+    }
+    else
+    {
+      displayRenderStatus();
+    }
+  }
+
+  /* ================== SETTINGS ================== */
+  else
+  {
+
+    if (event == MENU_EVENT_BACK)
+    {
+      currentScreen = UI_SCREEN_STATUS;
+      displayClear();
+    }
+    else if (event != MENU_EVENT_NONE)
+  {
     menuHandleEvent(event);
     displayRenderMenu();
+  }
   }
 }
