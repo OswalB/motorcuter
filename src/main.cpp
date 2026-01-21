@@ -3,6 +3,7 @@
 #include <encoder.h>
 #include <menu.h>
 #include <display.h>
+#include "machine_state.h"
 
 enum UiScreen
 {
@@ -18,6 +19,7 @@ void setup()
   menuInit();
   displayInit();
   displayRenderMenu();
+  machineStateInit();
 }
 
 void loop()

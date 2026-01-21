@@ -1,6 +1,7 @@
 #include <LiquidCrystal_I2C.h>
 #include "display.h"
 #include "menu.h"
+#include "machine_state.h"
 
 #define LCD_ADDR 0x27
 #define LCD_COLS 20
@@ -8,16 +9,18 @@
 
 static LiquidCrystal_I2C lcd(LCD_ADDR, LCD_COLS, LCD_ROWS);
 static uint8_t firstVisible = 0;
-static void displayPrintValue(const MenuItem& item);
+static void displayPrintValue(const MenuItem &item);
 
-void displayInit() {
+void displayInit()
+{
   lcd.init();
   lcd.backlight();
   lcd.clear();
 }
 
-void displayRenderMenu() {
-  const MenuContext& m = menuGetContext();
+void displayRenderMenu()
+{
+  const MenuContext &m = menuGetContext();
 
   if (m.selectedIndex < firstVisible)
     firstVisible = m.selectedIndex;
@@ -26,64 +29,72 @@ void displayRenderMenu() {
 
   lcd.clear();
 
-  for (uint8_t row = 0; row < 4; row++) {
+  for (uint8_t row = 0; row < 4; row++)
+  {
     uint8_t idx = firstVisible + row;
-    if (idx >= m.itemCount) break;
+    if (idx >= m.itemCount)
+      break;
 
     lcd.setCursor(0, row);
     lcd.print(idx == m.selectedIndex
-      ? (m.mode == MENU_MODE_EDIT ? "*" : ">")
-      : " ");
+                  ? (m.mode == MENU_MODE_EDIT ? "*" : ">")
+                  : " ");
 
     lcd.print(m.currentMenu[idx].label);
 
-    if (m.currentMenu[idx].type == MENU_VALUE) {
+    if (m.currentMenu[idx].type == MENU_VALUE)
+    {
       lcd.setCursor(14, row);
-      //lcd.print(*m.currentMenu[idx].value);
+      // lcd.print(*m.currentMenu[idx].value);
       displayPrintValue(m.currentMenu[idx]);
     }
   }
 }
 
-static void displayPrintValue(const MenuItem& item) {
-  if (item.value == nullptr) return;
+static void displayPrintValue(const MenuItem &item)
+{
+  if (item.value == nullptr)
+    return;
 
-  switch (item.format) {
+  switch (item.format)
+  {
 
-    case MENU_FMT_NONE:
-      lcd.print(*item.value);
-      break;
+  case MENU_FMT_NONE:
+    lcd.print(*item.value);
+    break;
 
-    case MENU_FMT_SENSE:
-      lcd.print(*item.value == 0 ? "Adel" : "Rev");
-      break;
+  case MENU_FMT_SENSE:
+    lcd.print(*item.value == 0 ? "Adel" : "Rev");
+    break;
 
-    case MENU_FMT_DEC1:
-      lcd.print(*item.value / 10.0, 1);
-      break;
+  case MENU_FMT_DEC1:
+    lcd.print(*item.value / 10.0, 1);
+    break;
 
-    default:
-      lcd.print(*item.value);
-      break;
+  default:
+    lcd.print(*item.value);
+    break;
   }
 }
 
-void displayRenderStatus() {
+void displayRenderStatus()
+{
   lcd.setCursor(0, 0);
-  lcd.print("Estado Maquina");
+  lcd.print("Estado Maquinola");
 
   lcd.setCursor(0, 1);
-  lcd.print("M1 Vel:");
-  lcd.print(motor1_speed);
+  lcd.print("M1: ");
+  lcd.print(machineState.motor1Running ? "ON " : "OFF");
 
   lcd.setCursor(0, 2);
-  lcd.print("M1 Acc:");
-  lcd.print(motor1_accel);
+  lcd.print("M2 PRG: ");
+  lcd.print(machineState.motor2PrgActive);
 
   lcd.setCursor(0, 3);
   lcd.print("Menu: Click");
 }
 
-void displayClear() {
+void displayClear()
+{
   lcd.clear();
 }
