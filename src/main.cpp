@@ -4,6 +4,7 @@
 #include <menu.h>
 #include <display.h>
 #include "machine_state.h"
+#include "serial_if.h"
 
 enum UiScreen
 {
@@ -14,7 +15,10 @@ enum UiScreen
 static UiScreen currentScreen = UI_SCREEN_STATUS;
 
 void setup()
-{
+{ 
+  pinMode(13,OUTPUT);
+  serialInit();
+  Serial.println("HELLO World");
   encoderInit();
   menuInit();
   displayInit();
@@ -24,6 +28,8 @@ void setup()
 
 void loop()
 {
+  serialUpdate();
+  
   MenuEvent event = encoderGetEvent();
 
   /* ================== STATUS ================== */

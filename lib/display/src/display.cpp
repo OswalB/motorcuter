@@ -2,6 +2,7 @@
 #include "display.h"
 #include "menu.h"
 #include "machine_state.h"
+#include "display_fmt.h"
 
 #define LCD_ADDR 0x27
 #define LCD_COLS 20
@@ -16,6 +17,18 @@ void displayInit()
   lcd.init();
   lcd.backlight();
   lcd.clear();
+}
+
+void displaySetCursor(uint8_t col, uint8_t row) {
+  lcd.setCursor(col, row);
+}
+
+void displayPrint(const char* txt) {
+  lcd.print(txt);
+}
+
+void displayPrintChar(char c) {
+  lcd.print(c);
 }
 
 void displayRenderMenu()
@@ -79,7 +92,12 @@ static void displayPrintValue(const MenuItem &item)
 
 void displayRenderStatus()
 {
-  lcd.setCursor(0, 0);
+  lcdFmtText(0,0,"Machine status", 20, ALIGN_CENTER);
+  lcdFmtText(0,1,"new state", 15, ALIGN_RIGHT);
+  lcdFmtText(0,2,"new state", 20, ALIGN_LEFT);
+  //const MachineState& s = machineGetState();
+
+  /*lcd.setCursor(0, 0);
   lcd.print("Estado Maquinola");
 
   lcd.setCursor(0, 1);
@@ -91,7 +109,7 @@ void displayRenderStatus()
   lcd.print(machineState.motor2PrgActive);
 
   lcd.setCursor(0, 3);
-  lcd.print("Menu: Click");
+  lcd.print("Menu: Click");*/
 }
 
 void displayClear()
