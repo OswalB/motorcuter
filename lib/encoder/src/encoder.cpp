@@ -12,7 +12,7 @@
 static RotaryEncoder encoder(
   ENC_A,
   ENC_B,
-  RotaryEncoder::LatchMode::FOUR3
+  RotaryEncoder::LatchMode::TWO03
 );
 
 //static Bounce button = Bounce();

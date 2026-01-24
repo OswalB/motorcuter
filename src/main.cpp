@@ -5,6 +5,7 @@
 #include <display.h>
 #include "machine_state.h"
 #include "serial_if.h"
+#include "storage.h"
 
 enum UiScreen
 {
@@ -24,6 +25,35 @@ void setup()
   displayInit();
   displayRenderMenu();
   machineStateInit();
+  storageInit();
+
+  //test datos eeprom
+
+   MachineConfig* cfg = storageGet();
+
+  Serial.println("CONFIG ACTUAL:");
+  Serial.print("RPM: ");
+  Serial.println(cfg->rpm);
+  Serial.print("Sentido: ");
+  Serial.println(cfg->sentido);
+  Serial.print("Tiempo: ");
+  Serial.println(cfg->tiempo);
+
+  // Simular cambio del usuario
+  //cfg->rpm = 201;
+  cfg->sentido = true;
+
+  //storageSave();
+
+   
+
+  Serial.println("CONFIG actualizada:");
+  Serial.print("RPM: ");
+  Serial.println(cfg->rpm);
+  Serial.print("Sentido: ");
+  Serial.println(cfg->sentido);
+  Serial.print("Tiempo: ");
+  Serial.println(cfg->tiempo);
 }
 
 void loop()

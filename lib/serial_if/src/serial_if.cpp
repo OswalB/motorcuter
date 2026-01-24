@@ -14,8 +14,9 @@ void serialInit() {
 void serialUpdate() {
   while (Serial.available()) {
     char c = Serial.read();
-
+    Serial.write(c);   // eco
     if (c == '\n') {
+      buffer.trim();
       handleCommand(buffer);
       buffer = "";
     } else {
