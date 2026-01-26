@@ -92,9 +92,10 @@ static void displayPrintValue(const MenuItem &item)
 
 void displayRenderStatus()
 {
-  lcdFmtText(0,0,"Hello Chiqui", 20, ALIGN_CENTER);
-  lcdFmtText(0,1,"new state", 15, ALIGN_RIGHT);
+  lcdFmtText(0,0,"Motor1 Mod", 9, ALIGN_LEFT);
+  lcdFmtInt(11,0, machineState.motors[0].mode, 15, ALIGN_RIGHT);
   lcdFmtText(0,2,"new state", 20, ALIGN_LEFT);
+
   //const MachineState& s = machineGetState();
 
   /*lcd.setCursor(0, 0);

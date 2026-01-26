@@ -59,6 +59,12 @@ void setup()
 void loop()
 {
   serialUpdate();
+
+   uint32_t now = millis();
+
+  machineStateUpdate(now);  
+
+
   
   MenuEvent event = encoderGetEvent();
 
