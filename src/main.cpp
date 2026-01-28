@@ -29,7 +29,7 @@ void setup()
 
   //test datos eeprom
 
-   MachineConfig* cfg = storageGet();
+  /* MachineConfig* cfg = storageGet();
 
   Serial.println("CONFIG ACTUAL:");
   Serial.print("RPM: ");
@@ -37,23 +37,14 @@ void setup()
   Serial.print("Sentido: ");
   Serial.println(cfg->sentido);
   Serial.print("Tiempo: ");
-  Serial.println(cfg->tiempo);
+  Serial.println(cfg->tiempo);*/
 
   // Simular cambio del usuario
   //cfg->rpm = 201;
-  cfg->sentido = true;
+  //cfg->sentido = true;
 
   //storageSave();
 
-   
-
-  Serial.println("CONFIG actualizada:");
-  Serial.print("RPM: ");
-  Serial.println(cfg->rpm);
-  Serial.print("Sentido: ");
-  Serial.println(cfg->sentido);
-  Serial.print("Tiempo: ");
-  Serial.println(cfg->tiempo);
 }
 
 void loop()
@@ -75,7 +66,7 @@ void loop()
     if (event == MENU_EVENT_CLICK)
     {
       currentScreen = UI_SCREEN_SETTINGS;
-      displayClear();
+      //displayClear();
       displayRenderMenu();
     }
     else

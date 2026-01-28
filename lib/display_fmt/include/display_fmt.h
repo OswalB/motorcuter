@@ -7,6 +7,26 @@ enum Align {
   ALIGN_RIGHT
 };
 
+enum UnitType {
+  UNIT_NONE,
+  UNIT_RPM,
+  UNIT_MS,
+  UNIT_S
+};
+
+typedef enum {
+  FMT_RAW = 0,   // imprime el entero tal cual
+  FMT_MODE,      // enum MotorMode -> texto
+  FMT_BOOL,
+  FMT_DEC_1,
+  FMT_DEC_2,
+  FMT_DEC1_S,
+  FMT_DEC1_MS,
+  FMT_RPM,
+  FMT_COUNT      // SIEMPRE el último
+  
+} FmtType;
+
 /* Texto crudo */
 void lcdFmtText(
   uint8_t col,
@@ -22,7 +42,8 @@ void lcdFmtInt(
   uint8_t row,
   int value,
   uint8_t width,
-  Align align
+  Align align,
+  FmtType fmt
 );
 
 /* Booleanos (ON/OFF, CW/CCW, etc.) */

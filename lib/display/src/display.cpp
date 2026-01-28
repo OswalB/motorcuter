@@ -92,25 +92,14 @@ static void displayPrintValue(const MenuItem &item)
 
 void displayRenderStatus()
 {
-  lcdFmtText(0,0,"Motor1 Mod", 9, ALIGN_LEFT);
-  lcdFmtInt(11,0, machineState.motors[0].mode, 15, ALIGN_RIGHT);
-  lcdFmtText(0,2,"new state", 20, ALIGN_LEFT);
-
-  //const MachineState& s = machineGetState();
-
-  /*lcd.setCursor(0, 0);
-  lcd.print("Estado Maquinola");
-
-  lcd.setCursor(0, 1);
-  lcd.print("M1: ");
-  lcd.print(machineState.motor1Running ? "ON " : "OFF");
-
-  lcd.setCursor(0, 2);
-  lcd.print("M2 PRG: ");
-  lcd.print(machineState.motor2PrgActive);
-
-  lcd.setCursor(0, 3);
-  lcd.print("Menu: Click");*/
+  //lcdFmtInt(0, 0, 0,20, ALIGN_RIGHT, FMT_MODE);    
+  ///lcdFmtInt(0, 1, 0, 20, ALIGN_RIGHT, FMT_BOOL);    
+  lcdFmtInt(0, 0, 4567, 20, ALIGN_LEFT,FMT_DEC_1);
+  //lcdFmtInt(0, 3, 4567, 20, ALIGN_LEFT,FMT_DEC_2);
+lcdFmtInt(0, 1, 125, 15, ALIGN_LEFT, FMT_RPM);      // "125 RPM"
+lcdFmtInt(0, 2, 153, 15, ALIGN_RIGHT, FMT_DEC1_S);  // "15.3 s"
+lcdFmtInt(0, 3, 250, 15, ALIGN_RIGHT, FMT_DEC1_MS); // "25.0 ms"
+  
 }
 
 void displayClear()
